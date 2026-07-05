@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>สุขสันต์วันเกิดแม่</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Kanit = body, Charmonman = ลายมือ (handwriting) -->
+  <link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Kanit:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ปุ่มเสียง (option) -->
+  <!-- <audio id="bgm" src="song.mp3" loop></audio> -->
+
+  <!-- ===== SECTION 1: จดหมาย ===== -->
+  <section class="letter-section" id="s1">
+    <div class="confetti" aria-hidden="true"></div>
+
+    <div class="envelope" id="envelope">
+      <!-- ด้านในซอง (อยู่หลังจดหมาย) -->
+      <div class="env-back" aria-hidden="true"></div>
+
+      <!-- แผ่นจดหมายจริง: เริ่มซุกอยู่ "ใน" ซอง ระหว่างหลังกับหน้าซอง -->
+      <div class="letter">
+        <div class="balloons" aria-hidden="true">
+          <span class="balloon b1"></span>
+          <span class="balloon b2"></span>
+          <span class="balloon b3"></span>
+        </div>
+
+        <p class="kicker">ถึงแม่ที่รักที่สุด</p>
+        <h1 class="letter-title">สุขสันต์<br />วันเกิดนะแม่</h1>
+
+        <!-- รูปแรก: หนู + แม่ -->
+        <div class="hero-photo photo-slot" data-slot="hero">
+          <img src="photos/hbd-hero.png" alt="หนูกับแม่" />
+        </div>
+
+        <p class="letter-body">
+          ขอบคุณสำหรับทุกอย่างที่แม่ทำให้เสมอมา<br />
+          เลื่อนลงไปดูความทรงจำของเราด้วยกันนะ ↓
+        </p>
+      </div>
+
+      <!-- หน้าซอง (บังส่วนล่างจดหมาย) + flap + ตราครั่ง -->
+      <div class="env-front" aria-hidden="true">
+        <p class="sender">จดหมายจากเด็กอ้วน</p>
+      </div>
+      <div class="flap" aria-hidden="true"></div>
+      <div class="wax" aria-hidden="true">💌</div>
+    </div>
+
+    <p class="tap-hint">แตะซองเพื่อเปิดจดหมาย</p>
+
+    <div class="scroll-hint">เลื่อนลง</div>
+  </section>
+
+  <!-- ===== INTERLUDE: ข้อความคั่น (scroll reveal ทีละบรรทัด) ===== -->
+  <section class="interlude" id="i1">
+    <p class="interlude-line reveal">มีคนหนึ่ง...</p>
+    <p class="interlude-line reveal">ที่อยู่ข้างหนูมาตั้งแต่วันแรก</p>
+    <p class="interlude-line reveal big">คนนั้นคือ <em>แม่</em></p>
+    <p class="interlude-line reveal">ย้อนดูความทรงจำของเรากันนะ</p>
+  </section>
+
+  <!-- ===== SECTION 2: PHOTO CARD ห้อยบนสาย (เลื่อนแนวนอน) ===== -->
+  <section class="string-section" id="s2">
+    <div class="sticky-stage">
+      <h2 class="section-heading">ความทรงจำของเรา</h2>
+      <p class="era-label" id="eraLabel">จุดเริ่มต้น</p>
+
+      <!-- สายที่ห้อยการ์ด -->
+      <div class="clothesline" aria-hidden="true"></div>
+
+      <div class="track" id="track">
+        <div class="story-panel">
+          <p class="story-accent">กาลครั้งหนึ่ง...</p>
+          <p>เรื่องราวของเราสองคน<br />เริ่มต้นขึ้นเมื่อหลายปีก่อน</p>
+        </div>
+
+        <figure class="card photo-slot" data-slot="past1">
+          <span class="peg"></span>
+          <span class="year-badge">วัยเด็ก</span>
+          <div class="card-photo"><img src="photos/young-hbd.jpg" alt="ตอนหนูเด็กกับแม่" /></div>
+          <figcaption>ขอบคุณแม่ที่ดูแลหนูมาตั้งแต่เด็ก</figcaption>
+        </figure>
+
+        <div class="story-panel">
+          <p>จากเด็กตัวเล็ก ๆ ในอ้อมกอดแม่<br />
+          วันเวลาผ่านไป หนูค่อย ๆ โตขึ้น</p>
+          <p class="story-accent">แต่แม่ไม่เคยหายไปไหนเลย</p>
+        </div>
+
+        <figure class="card photo-slot" data-slot="past2">
+          <span class="peg"></span>
+          <span class="year-badge">เติบโต</span>
+          <div class="card-photo"><img src="photos/middle-hbd.jpg" alt="เติบโตมากับแม่" /></div>
+          <figcaption>ทุกก้าวมีแม่</figcaption>
+        </figure>
+
+        <div class="story-panel">
+          <p>ทุกความสำเร็จ ทุกรอยยิ้ม<br />
+          มีแม่คอยอยู่เบื้องหลังเสมอ</p>
+          <p class="story-accent">จนมาถึงวันนี้...</p>
+        </div>
+
+        <figure class="card photo-slot" data-slot="now">
+          <span class="peg"></span>
+          <span class="year-badge">วันนี้</span>
+          <div class="card-photo"><img src="photos/present-hbd.jpg" alt="หนูกับแม่วันนี้" /></div>
+          <figcaption>และตลอดไป</figcaption>
+        </figure>
+
+        <div class="story-panel">
+          <p>และเรื่องราวของเรา</p>
+          <p class="story-accent">ยังมีต่ออีกยาว ๆ เลยนะแม่ →</p>
+        </div>
+      </div>
+
+      <div class="hscroll-hint">เลื่อนต่อ →</div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: ลายมือ + การ์ดปิดท้าย ===== -->
+  <section class="finale-section" id="s3">
+    <div class="confetti soft" aria-hidden="true"></div>
+
+    <div class="handwrite-wrap">
+      <p class="hand-line l1">Happy Birthday</p>
+      <h2 class="hand-line l2">สุขสันต์วันเกิดนะแม่</h2>
+      <p class="hand-line l3">รักแม่ที่สุดในโลก ♡</p>
+    </div>
+
+    <figure class="card final-card photo-slot reveal" data-slot="final">
+      <span class="peg"></span>
+      <div class="card-photo"><img src="photos/hbd-hero.png" alt="หนูกับแม่" /></div>
+      <figcaption>จากเด็กอ้วน</figcaption>
+    </figure>
+
+    <!-- หัวใจลอยขึ้นตอนถึงท้ายสุด -->
+    <div class="hearts" id="hearts" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===== SECTION 4: เค้กทุเรียน (แตะกินได้) ===== -->
+  <section class="cake-section" id="s4">
+    <h2 class="section-heading reveal">ของขวัญพิเศษ 🎁</h2>
+    <p class="cake-hint reveal" id="cakeHint">ทุเรียนผ่าซีกของแม่ · แตะเพื่อกินเลย 🍴</p>
+
+    <div class="cake" id="cake" role="button" aria-label="แตะเพื่อกินทุเรียน">
+      <div class="candle" aria-hidden="true"><span class="flame"></span></div>
+
+      <svg class="durian-svg" viewBox="0 0 340 230" aria-hidden="true">
+        <defs>
+          <radialGradient id="fleshGrad" cx="40%" cy="30%">
+            <stop offset="0%" stop-color="#fbe98a" />
+            <stop offset="70%" stop-color="#f5d54a" />
+            <stop offset="100%" stop-color="#e9bf34" />
+          </radialGradient>
+          <linearGradient id="huskGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8fbe55" />
+            <stop offset="100%" stop-color="#5f8f38" />
+          </linearGradient>
+        </defs>
+
+        <!-- เปลือกหนาม (จุด polygon สร้างด้วย JS) -->
+        <polygon id="husk" fill="url(#huskGrad)" />
+        <!-- ขอบผ่า + เนื้อในเปลือกสีครีม -->
+        <ellipse cx="170" cy="100" rx="142" ry="40" fill="#a9c97a" />
+        <ellipse cx="170" cy="100" rx="128" ry="32" fill="#f6efd3" />
+
+        <!-- พูทุเรียน 5 พู (กินได้ทีละพู) -->
+        <g class="pod"><ellipse cx="62"  cy="96"  rx="27" ry="20" fill="url(#fleshGrad)" stroke="#d9ae2a" stroke-width="1.5"/><ellipse cx="54"  cy="90" rx="8" ry="5" fill="#fdf3b3" opacity=".8"/></g>
+        <g class="pod"><ellipse cx="116" cy="102" rx="29" ry="23" fill="url(#fleshGrad)" stroke="#d9ae2a" stroke-width="1.5"/><ellipse cx="107" cy="95" rx="9" ry="6" fill="#fdf3b3" opacity=".8"/></g>
+        <g class="pod"><ellipse cx="170" cy="104" rx="31" ry="25" fill="url(#fleshGrad)" stroke="#d9ae2a" stroke-width="1.5"/><ellipse cx="160" cy="96" rx="10" ry="6" fill="#fdf3b3" opacity=".8"/></g>
+        <g class="pod"><ellipse cx="224" cy="102" rx="29" ry="23" fill="url(#fleshGrad)" stroke="#d9ae2a" stroke-width="1.5"/><ellipse cx="215" cy="95" rx="9" ry="6" fill="#fdf3b3" opacity=".8"/></g>
+        <g class="pod"><ellipse cx="278" cy="96"  rx="27" ry="20" fill="url(#fleshGrad)" stroke="#d9ae2a" stroke-width="1.5"/><ellipse cx="270" cy="90" rx="8" ry="5" fill="#fdf3b3" opacity=".8"/></g>
+      </svg>
+
+      <div class="plate" aria-hidden="true"></div>
+    </div>
+
+    <p class="cake-msg" id="cakeMsg">อิ่มแล้ว... อย่าลืมดูแลสุขภาพด้วยนะแม่ 🩷</p>
+
+    <div class="end-actions">
+      <button class="share-btn" id="shareBtn">💬 แชร์เว็บนี้ลง LINE</button>
+      <button class="top-btn" id="topBtn">↑ กลับไปอ่านจดหมายอีกรอบ</button>
+    </div>
+  </section>
+
+  <!-- ===== กรอบตกแต่งวันเกิด (คงที่ทุก section) ===== -->
+  <div class="frame" aria-hidden="true">
+    <!-- ธงราว bunting ด้านบน -->
+    <div class="bunting">
+      <span class="flag"></span><span class="flag"></span><span class="flag"></span>
+      <span class="flag"></span><span class="flag"></span><span class="flag"></span>
+      <span class="flag"></span><span class="flag"></span><span class="flag"></span>
+      <span class="flag"></span><span class="flag"></span><span class="flag"></span>
+    </div>
+    <!-- บอลลูนมุมจอ -->
+    <span class="corner-balloon cb-l"></span>
+    <span class="corner-balloon cb-r"></span>
+    <!-- ประกายมุมล่าง -->
+    <span class="sparkle sp1">✦</span>
+    <span class="sparkle sp2">✧</span>
+    <span class="sparkle sp3">✦</span>
+  </div>
+
+  <!-- ปุ่มเปิด/ปิดเพลง Happy Birthday -->
+  <button id="musicBtn" class="music-btn" aria-label="เปิดเพลง">🎵</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
