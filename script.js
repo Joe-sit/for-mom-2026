@@ -42,7 +42,10 @@ function openEnvelope() {
     burstConfetti();
     document.body.classList.remove('locked');
   }, 1600);
-  setTimeout(() => { envelope.style.height = 'auto'; }, 2100); // จบแล้วปล่อย auto รองรับ resize
+  setTimeout(() => {
+    envelope.style.height = 'auto'; // จบแล้วปล่อย auto รองรับ resize
+    measure();                      // ความสูงหน้าเปลี่ยน -> วัดตำแหน่ง section ใหม่
+  }, 2100);
   if (!playing) startMusic(); // แตะ = gesture -> เริ่มเพลงได้เลย
 }
 envelope.addEventListener('click', openEnvelope);
@@ -62,14 +65,23 @@ let targetP = 0, smoothP = 0;   // progress ของ section แนวนอน
 let targetY = 0, smoothY = 0;   // scrollY สำหรับ parallax
 const confettis = document.querySelectorAll('.confetti');
 
+// วัดตำแหน่งการ์ดครั้งเดียว (ไม่เรียก getBoundingClientRect ทุกเฟรม -> ไม่ force layout)
+let cardMeta = [], maxShift = 0, sectionTop = 0, pinTotal = 1;
+function measure() {
+  maxShift = track.scrollWidth - window.innerWidth;
+  sectionTop = stringSection.offsetTop;
+  pinTotal = stringSection.offsetHeight - window.innerHeight;
+  cardMeta = [...cards].map(c => ({ el: c, center: c.offsetLeft + c.offsetWidth / 2, w: c.offsetWidth }));
+}
+window.addEventListener('load', measure);
+measure();
+
 function onScroll() {
-  const rect = stringSection.getBoundingClientRect();
-  const total = stringSection.offsetHeight - window.innerHeight; // ระยะ pin
-  targetP = Math.min(1, Math.max(0, (-rect.top) / total));
   targetY = window.scrollY;
+  targetP = Math.min(1, Math.max(0, (targetY - sectionTop) / pinTotal));
 }
 window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll);
+window.addEventListener('resize', () => { measure(); onScroll(); });
 onScroll();
 
 // ===== SNAP SCROLL: หนึ่ง gesture = ไหลไปจุดถัดไปเลย ไม่ต้องลากเอง =====
@@ -176,26 +188,25 @@ function tick() {
     }
   }
 
+  // ถ้าไม่มีอะไรขยับ -> ข้ามงาน DOM ทั้งหมด (ประหยัดแบตและ GPU ตอนอยู่นิ่ง)
+  const busy = Math.abs(targetP - smoothP) > 0.0004 || Math.abs(targetY - smoothY) > 0.4;
+  if (!busy) { requestAnimationFrame(tick); return; }
+
   // lerp: ขยับ 8% ของระยะที่เหลือต่อเฟรม -> นุ่ม มีแรงเฉื่อย
   smoothP += (targetP - smoothP) * 0.08;
   smoothY += (targetY - smoothY) * 0.1;
 
-  // ระยะที่ track ต้องเลื่อนซ้าย = ความกว้างส่วนเกินหน้าจอ
-  const maxShift = track.scrollWidth - window.innerWidth;
-  if (maxShift > 0) {
-    track.style.transform = `translateX(${-smoothP * maxShift}px)`;
+  const shift = smoothP * maxShift;
+  if (maxShift > 0) track.style.transform = `translateX(${-shift}px)`;
+
+  // การ์ดใกล้กลางจอ -> active (คำนวณจากตำแหน่งที่วัดไว้ ไม่แตะ layout)
+  const mid = window.innerWidth / 2;
+  for (const m of cardMeta) {
+    m.el.classList.toggle('active', Math.abs(m.center - shift - mid) < m.w * 0.6);
   }
 
-  // การ์ดที่อยู่ใกล้กลางจอ -> active (โฟกัส เด่นขึ้น)
-  const mid = window.innerWidth / 2;
-  cards.forEach(card => {
-    const r = card.getBoundingClientRect();
-    const center = r.left + r.width / 2;
-    card.classList.toggle('active', Math.abs(center - mid) < r.width * 0.6);
-  });
-
   // ฉากหลังไล่สี: อดีต (sepia อุ่น) -> ปัจจุบัน (ชมพูสดใส)
-  const hue = 35 - 55 * smoothP; // 35° (sepia) -> -20° ≡ 340° (ชมพู) ผ่านโทนแดง ไม่ผ่านเขียว
+  const hue = 35 - 55 * smoothP; // 35° -> -20° ≡ 340° ผ่านโทนแดง ไม่ผ่านเขียว
   const sat = 55 + 45 * smoothP;
   stage.style.backgroundColor = `hsl(${hue} ${sat}% 94%)`;
 

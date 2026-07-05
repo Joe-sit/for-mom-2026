@@ -246,12 +246,21 @@ body {
 .b3 { top: -8px; right: 26%; background: #9ad0c2; animation: float 4.6s ease-in-out infinite .8s; }
 @keyframes float { 50% { transform: translateY(-10px); } }
 
-.scroll-hint, .hscroll-hint {
-  position: absolute; bottom: 3vh; left: 50%; transform: translateX(-50%);
-  font-size: .8rem; color: var(--pink-deep); letter-spacing: .1em;
+/* คำใบ้เลื่อนลง: อยู่ในจดหมาย ใต้ข้อความ เห็นชัดแน่นอน */
+.scroll-hint {
+  margin-top: 14px;
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--pink-deep);
+  letter-spacing: .08em;
   animation: bob 1.6s ease-in-out infinite;
 }
-@keyframes bob { 50% { transform: translate(-50%, 8px); } }
+.hscroll-hint {
+  position: absolute; bottom: 3vh; left: 50%; transform: translateX(-50%);
+  font-size: .8rem; color: var(--pink-deep); letter-spacing: .1em;
+  animation: bob2 1.6s ease-in-out infinite;
+}
+@keyframes bob { 50% { transform: translateY(7px); } }
 
 /* ============ SECTION 2 : สาย + การ์ด (เลื่อนแนวนอน) ============ */
 .string-section { height: 520vh; position: relative; } /* ความสูง = ระยะเลื่อนแนวนอน */
@@ -315,8 +324,9 @@ body {
   gap: 6vw;
   padding: 0 8vw;
   align-items: flex-start;
-  will-change: transform;
+  will-change: transform; /* เลื่อนทุกเฟรม -> ยกขึ้น GPU layer */
 }
+.confetti { will-change: transform; }
 
 .card {
   flex: 0 0 auto;
